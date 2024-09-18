@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Koketso Weather App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,16 +14,18 @@
       rel="stylesheet"
       href="C:\Users\itsko\OneDrive\Documentos\GitHub\KoketsoWeatherApp\style.css"
     />
+    <title>Koketso Weather App</title>
   </head>
   <body>
     <div class="weather-app-content">
       <header>
-        <form class="search-form">
+        <form id="search-form">
           <input
             type="search"
             placeholder="Enter a city..."
             required
             class="search-form-input"
+            id="search-form-input"
           />
           <input type="submit" value="Search" class="search-form-button" />
         </form>
@@ -32,16 +33,18 @@
       <main>
         <div class="weather-app-data">
           <div>
-            <h1 class="weather-app-city" id="">Johannesburg</h1>
+            <h1 class="weather-app-city" id="weather-app-city"></h1>
             <p class="weather-app-details">
-              Friday 11:07, sunny
+              <span id="time"></span>
+              <span id="weather-description">sunny</span>
               <br />
-              Humidity: <strong>15%</strong> Wind: <strong>0.00 km/h</strong>
+              Humidity: <strong id="humidity"></strong> Wind:
+              <strong id="wind-speed"></strong>
             </p>
           </div>
           <div class="weather-app-temp-container">
             <div class="weather-app-icon">🌞</div>
-            <div class="weather-app-temp" id="temperature"></div>
+            <div class="weather-app-temp" id="temperature">12</div>
             <div class="weather-app-temp-unit">°C</div>
           </div>
         </div>
@@ -58,5 +61,6 @@
         </span>
       </footer>
     </div>
+    <script src="C:\Users\itsko\OneDrive\Documentos\GitHub\KoketsoWeatherApp\index.js"></script>
   </body>
 </html>

@@ -20,12 +20,10 @@ function refreshWeather(response) {
   descriptionElement.innerHTML = response.data.condition.description;
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   speedElement.innerHTML = `${response.data.wind.speed}km/h`;
+
+  getForecastCity(response.data.city);
 }
-function searchCity(city) {
-  let apiKey = "82f2ff36563otbde1564b5ee447a074a";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
-  axios.get(apiUrl).then(refreshWeather);
-}
+
 function formatDate(date) {
   let minutes = date.getMinutes();
   let hours = date.getHours();
@@ -45,6 +43,11 @@ function formatDate(date) {
   }
   return `${day} ${hours}:${minutes}`;
 }
+function searchCity(city) {
+  let apiKey = "82f2ff36563otbde1564b5ee447a074a";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
+  axios.get(apiUrl).then(refreshWeather);
+}
 function handleSearchSubmit(event) {
   event.preventDefault();
   let searchInput = document.querySelector("#search-form-input");
@@ -58,7 +61,7 @@ function formatDay(timestamp) {
 
   return days[date.getDay()];
 }
-function getForecastCity(event) {
+function getForecastCity(city) {
   let apiKey = "82f2ff36563otbde1564b5ee447a074a";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
   axios(apiUrl).then(displayForecast);
@@ -67,10 +70,11 @@ function displayForecast(response) {
   let forecastHtml = "";
 
   response.data.daily.forEach(function (day, index) {
-    if (index < 6) {
+    if (index < 5) {
       forecastHtml =
         forecastHtml +
-        `<div class="weather-forecast-day">
+        `
+        <div class="weather-forecast-day">
             <div class="weather-forecast-date">${formatDay(day.time)}</div>
             <img  src = "${
               day.condition.icon_url
@@ -82,7 +86,8 @@ function displayForecast(response) {
               <div class="weather-forecast-temp"><strong>${Math.round(
                 day.temperature.minimum
               )}°</strong></div>
-            </div>`;
+            </div>
+            `;
     }
   });
 
@@ -92,3 +97,4 @@ function displayForecast(response) {
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 searchCity("Johannesburg");
+displayForecast("Johannesburg");
